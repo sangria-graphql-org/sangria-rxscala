@@ -1,6 +1,5 @@
 name := "sangria-rxscala"
 organization := "org.sangria-graphql"
-version := "1.0.1-SNAPSHOT"
 
 description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))
@@ -27,7 +26,8 @@ libraryDependencies ++= Seq(
 git.remoteRepo := "git@github.com:sangria-graphql/sangria-rxscala.git"
 
 // Publishing
-
+releaseCrossBuild := true
+releasePublishArtifactsAction := PgpKeys.publishSigned.value
 publishMavenStyle := true
 publishArtifact in Test := false
 pomIncludeRepository := (_ ⇒ false)

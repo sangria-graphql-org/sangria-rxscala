@@ -1,5 +1,6 @@
 name := "sangria-rxscala"
 organization := "org.sangria-graphql"
+mimaPreviousArtifacts := Set("org.sangria-graphql" %% "sangria-rxscala" % "1.0.0")
 
 description := "Sangria RxScala integration"
 homepage := Some(url("http://sangria-graphql.org"))

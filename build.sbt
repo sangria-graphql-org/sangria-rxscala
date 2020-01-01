@@ -20,7 +20,7 @@ scalacOptions ++= {
 
 libraryDependencies ++= Seq(
   "org.sangria-graphql" %% "sangria-streaming-api" % "1.0.1",
-  "io.reactivex" %% "rxscala" % "0.26.5",
+  "io.reactivex" %% "rxscala" % "0.27.0",
   "org.scalatest" %% "scalatest" % "3.1.0" % Test
 )
 

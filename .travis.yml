@@ -1,9 +1,10 @@
 language: scala
 scala:
-  - 2.12.1
-  - 2.11.8
+  - 2.13.1
+  - 2.12.10
+  - 2.11.12
 jdk:
-  - oraclejdk8
+  - openjdk8
 
 script: |
   sbt ++$TRAVIS_SCALA_VERSION clean coverage test
@@ -13,5 +14,5 @@ after_success: |
 
 cache:
   directories:
-    - $HOME/.ivy2/cache
-    - $HOME/.sbt/boot/
+    - $HOME/.cache/coursier
+    - $HOME/.sbt/

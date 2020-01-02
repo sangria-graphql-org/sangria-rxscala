@@ -2,7 +2,6 @@ package sangria.streaming
 
 import java.util.concurrent.atomic.AtomicInteger
 
-import org.scalatest.{Matchers, WordSpec}
 import rx.lang.scala.Observable
 import rx.lang.scala.subjects.PublishSubject
 import sangria.streaming.rxscala.ObservableSubscriptionStream
@@ -11,8 +10,10 @@ import scala.concurrent.duration._
 import scala.concurrent.{Await, Future}
 import scala.language.postfixOps
 import scala.concurrent.ExecutionContext.Implicits.global
+import org.scalatest.matchers.should.Matchers
+import org.scalatest.wordspec.AnyWordSpec
 
-class RxScalaIntegrationSpec extends WordSpec with Matchers {
+class RxScalaIntegrationSpec extends AnyWordSpec with Matchers {
   val impl: SubscriptionStream[Observable] = new ObservableSubscriptionStream
 
   "RxScala Integration" should {
@@ -33,7 +34,7 @@ class RxScalaIntegrationSpec extends WordSpec with Matchers {
     }
 
     "mapFuture" in {
-      res(impl.mapFuture(Observable.from(List(1, 2, 10)))(x ⇒ Future.successful(x + 1))).toSet should be (Set(2, 3, 11))
+      res(impl.mapFuture(Observable.from(List(1, 2, 10)))(x => Future.successful(x + 1))).toSet should be (Set(2, 3, 11))
     }
 
     "first" in {
@@ -83,16 +84,16 @@ class RxScalaIntegrationSpec extends WordSpec with Matchers {
     }
 
     "flatMapFuture" in {
-      res(impl.flatMapFuture(Future.successful(1))(i ⇒ Observable.from(List(i.toString, (i + 1).toString)))) should be (List("1", "2"))
+      res(impl.flatMapFuture(Future.successful(1))(i => Observable.from(List(i.toString, (i + 1).toString)))) should be (List("1", "2"))
     }
 
     "recover" in {
-      val obs = Observable.from(List(1, 2, 3, 4)) map { i ⇒
+      val obs = Observable.from(List(1, 2, 3, 4)) map { i =>
         if (i == 3) throw new IllegalStateException("foo")
         else i
       }
 
-      res(impl.recover(obs)(_ ⇒ 100)) should be (List(1, 2, 100))
+      res(impl.recover(obs)(_ => 100)) should be (List(1, 2, 100))
     }
 
     "merge" in {
